@@ -16,7 +16,7 @@ class ChattyController extends Controller
     public function index(): View
     {
         return view('chatty.index', [
-            'chat' => Chatty::with('user')->latest()->get(),
+            'chatty' => Chatty::with('user')->latest()->get(),
         ]);
     }
 
