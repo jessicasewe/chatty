@@ -3,10 +3,10 @@
 namespace App\Policies;
 
 use Illuminate\Auth\Access\Response;
-use App\Models\Chatty;
+use App\Models\Chirp;
 use App\Models\User;
 
-class ChattyPolicy
+class ChirpPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class ChattyPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, Chatty $chatty): bool
+    public function view(User $user, Chirp $chirp): bool
     {
         //
     }
@@ -35,7 +35,7 @@ class ChattyPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, Chatty $chatty): bool
+    public function update(User $user, Chatty $chirp): bool
     {
         return $chatty->user()->is($user);
     }
@@ -43,15 +43,15 @@ class ChattyPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, Chatty $chatty): bool
+    public function delete(User $user, Chirp $chirp): bool
     {
-        return $this->update($user, $chatty);
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, Chatty $chatty): bool
+    public function restore(User $user, Chirp $chirp): bool
     {
         //
     }
@@ -59,7 +59,7 @@ class ChattyPolicy
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, Chatty $chatty): bool
+    public function forceDelete(User $user, Chirp $chirp): bool
     {
         //
     }

@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::resource('chatty', ChattyController::class)
-    ->only(['index', 'store', 'edit', 'update', 'delete'])
+    ->only(['index', 'store', 'edit', 'update', 'destroy'])
     ->middleware(['auth', 'verified']);
 
 require __DIR__.'/auth.php';

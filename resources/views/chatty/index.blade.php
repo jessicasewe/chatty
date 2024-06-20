@@ -21,7 +21,7 @@
                             <div>
                                 <span class="text-gray-800">{{ $chat->user->name }}</span>
                                 <small class="ml-2 text-sm text-gray-600">{{ $chat->created_at->format('j M Y, g:i a') }}</small>
-                                @unless ($chat->created_at->eq($chat->updated))
+                                @unless ($chat->created_at->eq($chat->updated_at))
                                     <small class="text-sm text-gray-600"> &middot; {{__('edited') }}</small>
                                 @endunless
                             </div>
@@ -38,6 +38,13 @@
                                         <x-dropdown-link :href="route('chatty.edit', $chat)">
                                             {{ __('Edit') }}
                                         </x-dropdown-link>
+                                        <form method="POST" action="{{ route('chatty.destroy', $chat) }}">
+                                            @csrf
+                                            @method('delete')
+                                            <x-dropdown-link :href="route('chatty.destroy', $chat)" onclick="event.preventDefault(); this.closest('form').submit();">
+                                                {{ __('Delete') }}
+                                            </x-dropdown-link>
+                                        </form>
                                     </x-slot>
                                 </x-dropdown>
                             @endif

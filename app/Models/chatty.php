@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use App\Events\ChattyCreated;
 
 class chatty extends Model
 {
@@ -12,6 +13,10 @@ class chatty extends Model
     
     protected $fillable = [
         'message',
+    ];
+
+    protected $dispatchesEvents = [
+        'created' => ChattyCreated::class
     ];
 
     public function user(): BelongsTo
