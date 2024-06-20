@@ -82,8 +82,12 @@ class ChattyController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(chatty $chatty)
+    public function destroy(chatty $chatty): RedirectResponse
     {
-        //
+        Gate::authorize('delete', $chatty);
+
+        $chatty->delete();
+
+        return redirect(route('chatty.index'));
     }
 }
