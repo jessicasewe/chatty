@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Gate;
 
 class ChattyController extends Controller
 {
@@ -53,17 +54,29 @@ class ChattyController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(chatty $chatty)
+    public function edit(chatty $chatty): View
     {
-        //
+        Gate::authorize('update', $chatty);
+
+        return view('chatty.edit', [
+            'chatty' =>$chatty,
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, chatty $chatty)
+    public function update(Request $request, chatty $chatty): RedirectResponse
     {
-        //
+        Gate::authorize('update', $chatty);
+
+        $validate = $request->validate([
+            'message' => 'required|string|max:255',
+        ]);
+
+        $chatty->update($validate);
+
+        return redirect(route('chatty.index'));
     }
 
     /**
